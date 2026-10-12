@@ -1,0 +1,863 @@
+/* =========================================================
+   Estilo CSS - Rede Raízes do Nordeste
+   Projeto Front-End - Aluno UNINTER: Luiz Gustavo da Silva (RU: 4933749)
+   Multicanal: Web Desktop, App Mobile e Totem de Autoatendimento
+   ========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+.container {
+  width: 92%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   1. BARRA DE CANAIS DE ATENDIMENTO (Web, Mobile e Totem)
+   ========================================================= */
+.barra-canais {
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 10px 0;
+  border-bottom: 2px solid #334155;
+  font-size: 13px;
+}
+
+.barra-canais-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.label-canal {
+  font-weight: bold;
+  color: #cbd5e1;
+}
+
+.grupo-canais {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-canal {
+  background-color: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-canal:hover {
+  background-color: #475569;
+}
+
+.btn-canal.ativo {
+  background-color: #b45309;
+  color: #ffffff;
+  border-color: #b45309;
+}
+
+/* =========================================================
+   ESTILOS DE ADAPTAÇÃO POR CANAL (Simulação de Ambiente)
+   ========================================================= */
+
+/* Modo Mobile (Formato de Aplicativo no Celular) */
+body.canal-mobile {
+  background-color: #0f172a;
+}
+body.canal-mobile .viewport-canal {
+  max-width: 420px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  overflow: hidden;
+  border: 8px solid #1e293b;
+}
+body.canal-mobile .header-flex {
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+}
+body.canal-mobile .grid-produtos {
+  grid-template-columns: 1fr;
+}
+body.canal-mobile .etapas-status {
+  flex-direction: column;
+  gap: 8px;
+}
+body.canal-mobile .linha-status {
+  width: 3px;
+  height: 15px;
+  margin: 0 auto;
+}
+
+/* Modo Totem Presencial (Touchscreen em Loja, botões grandes) */
+body.canal-totem {
+  background-color: #18181b;
+}
+body.canal-totem .viewport-canal {
+  max-width: 1050px;
+  margin: 15px auto;
+  background-color: #ffffff;
+  border: 6px solid #b45309;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+body.canal-totem .btn-adicionar,
+body.canal-totem .btn-filtro,
+body.canal-totem .btn-principal {
+  padding: 14px 20px;
+  font-size: 15px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+body.canal-totem .card-produto h3 {
+  font-size: 18px;
+}
+body.canal-totem .card-produto .preco {
+  font-size: 18px;
+}
+
+/* Modo Web Desktop (Padrão) */
+body.canal-web .viewport-canal {
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   2. BANNER DE PRIVACIDADE E COOKIES (LGPD)
+   ========================================================= */
+.banner-lgpd {
+  background-color: #111827;
+  color: #ffffff;
+  padding: 14px 0;
+  font-size: 13px;
+  border-bottom: 1px solid #374151;
+}
+
+.container-lgpd {
+  width: 92%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.texto-lgpd {
+  flex: 1 1 500px;
+}
+
+.texto-lgpd strong {
+  display: block;
+  color: #fbbf24;
+  margin-bottom: 2px;
+}
+
+.texto-lgpd a {
+  color: #60a5fa;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.botoes-lgpd {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-lgpd-primario {
+  background-color: #b45309;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.btn-lgpd-primario:hover {
+  background-color: #92400e;
+}
+
+.btn-lgpd-secundario {
+  background-color: #374151;
+  color: #f3f4f6;
+  border: 1px solid #4b5563;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* =========================================================
+   3. CABEÇALHO
+   ========================================================= */
+.cabecalho {
+  background-color: #ffffff;
+  border-bottom: 2px solid #e5e5e5;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo h1 {
+  font-size: 24px;
+  color: #b45309;
+  letter-spacing: -0.5px;
+}
+
+.logo p {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.seletor-unidade label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 5px;
+  color: #374151;
+}
+
+.seletor-unidade select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.acoes-usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.box-pontos {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.btn-carrinho {
+  background-color: #b45309;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.btn-carrinho:hover {
+  background-color: #92400e;
+}
+
+.faixa-promocao {
+  background-color: #78350f;
+  color: #ffffff;
+  padding: 8px 0;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* =========================================================
+   4. FILTROS E PRODUTOS DO CARDÁPIO
+   ========================================================= */
+.principal {
+  padding: 25px 0 45px 0;
+}
+
+.titulo-cardapio-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.titulo-cardapio-linha h2 {
+  font-size: 20px;
+  color: #111827;
+}
+
+.subtitulo-unidade {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.campo-busca input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 13px;
+  min-width: 220px;
+}
+
+.botoes-categoria {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.btn-filtro {
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.btn-filtro:hover {
+  background-color: #e5e7eb;
+}
+
+.btn-filtro.ativo {
+  background-color: #b45309;
+  color: #ffffff;
+  border-color: #b45309;
+  font-weight: bold;
+}
+
+/* Grade de produtos */
+.grid-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card-produto {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.card-produto .tag-categoria {
+  align-self: flex-start;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.card-produto h3 {
+  font-size: 16px;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.card-produto .descricao {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.card-produto .rodape-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 12px;
+}
+
+.card-produto .preco {
+  font-size: 16px;
+  font-weight: bold;
+  color: #b45309;
+}
+
+.btn-adicionar {
+  background-color: #15803d;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-adicionar:hover {
+  background-color: #166534;
+}
+
+/* =========================================================
+   5. ACOMPANHAMENTO DO STATUS DO PEDIDO
+   ========================================================= */
+.secao-rastreio {
+  margin-top: 40px;
+}
+
+.card-rastreio {
+  background-color: #ffffff;
+  border: 2px solid #b45309;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+}
+
+.rastreio-topo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.rastreio-topo h3 {
+  color: #b45309;
+  font-size: 20px;
+}
+
+.badge-pedido {
+  background-color: #b45309;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.etapas-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+  gap: 15px;
+}
+
+.etapa {
+  text-align: center;
+  width: 130px;
+}
+
+.icone-status {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  background-color: #e5e7eb;
+  color: #4b5563;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.etapa.ativa .icone-status {
+  background-color: #b45309;
+  color: #ffffff;
+}
+
+.etapa.concluida .icone-status {
+  background-color: #15803d;
+  color: #ffffff;
+}
+
+.etapa p {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.etapa small {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.linha-status {
+  width: 45px;
+  height: 3px;
+  background-color: #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.detalhes-rastreio {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 14px;
+  max-width: 500px;
+  margin: 15px auto;
+  text-align: left;
+}
+
+.detalhes-rastreio h4 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.lista-itens-rastreio {
+  list-style: none;
+  font-size: 13px;
+}
+
+.lista-itens-rastreio li {
+  padding: 3px 0;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.acoes-rastreio {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-secundario {
+  background-color: #4b5563;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.btn-secundario:hover {
+  background-color: #374151;
+}
+
+/* =========================================================
+   6. MODAL DO CARRINHO E CHECKOUT
+   ========================================================= */
+.modal-fundo {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 15px;
+}
+
+.modal-fundo.aberto {
+  display: flex;
+}
+
+.modal-conteudo {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 530px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  padding: 22px;
+}
+
+.modal-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 10px;
+}
+
+.btn-fechar {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666666;
+}
+
+.lista-carrinho {
+  margin: 15px 0;
+}
+
+.item-linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+}
+
+.bloco-fidelidade {
+  background-color: #fef3c7;
+  padding: 12px;
+  border-radius: 6px;
+  margin: 15px 0;
+  font-size: 13px;
+}
+
+.fidelidade-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.btn-pontos {
+  background-color: #b45309;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.totais-carrinho {
+  margin: 15px 0;
+  text-align: right;
+  font-size: 14px;
+}
+
+.total-destaque {
+  font-size: 18px;
+  color: #b45309;
+  margin-top: 5px;
+}
+
+.aviso-minimizacao {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.campo-form {
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.campo-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #374151;
+}
+
+.campo-form input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.campo-checkbox {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 15px 0;
+  font-size: 12px;
+  color: #374151;
+}
+
+.campo-checkbox a {
+  color: #b45309;
+  text-decoration: underline;
+}
+
+.opcoes-pagamento {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0 15px 0;
+}
+
+.opcao-pay {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.opcao-pay.ativo {
+  border-color: #b45309;
+  background-color: #fef3c7;
+}
+
+.bloco-pix {
+  text-align: center;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.qrcode-simulado img {
+  margin: 10px 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+}
+
+.chave-pix {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.btn-principal {
+  width: 100%;
+  background-color: #b45309;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-principal:hover {
+  background-color: #92400e;
+}
+
+/* Modal de Política de Privacidade LGPD */
+.texto-politica h4 {
+  font-size: 14px;
+  color: #111827;
+  margin: 14px 0 4px 0;
+}
+.texto-politica p, .texto-politica ul {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 8px;
+  text-align: left;
+}
+.texto-politica ul {
+  padding-left: 20px;
+}
+
+/* =========================================================
+   7. RODAPÉ
+   ========================================================= */
+.rodape {
+  background-color: #111827;
+  color: #9ca3af;
+  padding: 35px 0 15px 0;
+  font-size: 13px;
+  border-top: 3px solid #b45309;
+}
+
+.rodape-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.col-rodape h3, .col-rodape h4 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.col-rodape ul {
+  list-style: none;
+}
+
+.col-rodape ul li {
+  margin-bottom: 6px;
+}
+
+.col-rodape a {
+  color: #93c5fd;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.rodape-inferior {
+  border-top: 1px solid #374151;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* =========================================================
+   8. RESPONSIVIDADE
+   ========================================================= */
+@media (max-width: 768px) {
+  .header-flex {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .acoes-usuario {
+    justify-content: center;
+  }
+  .titulo-cardapio-linha {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .campo-busca {
+    width: 100%;
+  }
+  .campo-busca input {
+    width: 100%;
+  }
+  .grid-produtos {
+    grid-template-columns: 1fr;
+  }
+  .etapas-status {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .linha-status {
+    width: 3px;
+    height: 15px;
+    margin: 0 auto;
+  }
+}

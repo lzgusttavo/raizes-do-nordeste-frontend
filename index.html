@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lanchonete Raízes do Nordeste - Sistema Multicanal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="canal-web">
+
+  <!-- AVISO DE PRIVACIDADE E COOKIES (LGPD - Lei nº 13.709/2018) -->
+  <aside id="banner-lgpd" class="banner-lgpd" role="region" aria-label="Aviso de Privacidade e Cookies">
+    <div class="container-lgpd">
+      <div class="texto-lgpd">
+        <strong>Privacidade e Proteção de Dados (LGPD)</strong>
+        <p>A Rede Raízes do Nordeste coleta dados estritamente necessários (como nome e contato) apenas para processar pedidos e pontuar no programa de fidelidade. Você pode gerenciar suas preferências ou consultar nossa <a href="#" id="link-abrir-politica">Política de Privacidade</a>.</p>
+      </div>
+      <div class="botoes-lgpd">
+        <button id="btn-aceitar-lgpd-todos" class="btn-lgpd-primario">Aceitar Todos</button>
+        <button id="btn-aceitar-lgpd-essenciais" class="btn-lgpd-secundario">Apenas Essenciais</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- BARRA DE SELEÇÃO DO CANAL DE ATENDIMENTO (Web, App Mobile e Totem Presencial) -->
+  <div class="barra-canais">
+    <div class="container barra-canais-flex">
+      <span class="label-canal">Canal de Atendimento:</span>
+      <div class="grupo-canais">
+        <button type="button" class="btn-canal ativo" data-canal="web">Portal Web Desktop</button>
+        <button type="button" class="btn-canal" data-canal="mobile">Aplicativo Mobile (PWA)</button>
+        <button type="button" class="btn-canal" data-canal="totem">Totem de Autoatendimento (Loja)</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="viewport-canal" id="viewport-canal">
+
+    <!-- CABEÇALHO PRINCIPAL -->
+    <header class="cabecalho">
+      <div class="container header-flex">
+        <div class="logo">
+          <h1>Raízes do Nordeste</h1>
+          <p>Culinária típica regional, tradição e rapidez</p>
+        </div>
+
+        <!-- Seletor de Unidade (cardápio dinâmico por filial) -->
+        <div class="seletor-unidade">
+          <label for="select-unidade">Filial:</label>
+          <select id="select-unidade">
+            <option value="recife">Recife - Matriz (Boa Viagem)</option>
+            <option value="salvador">Salvador (Pelourinho)</option>
+            <option value="fortaleza">Fortaleza (Beira-Mar)</option>
+          </select>
+        </div>
+
+        <!-- Ações do usuário: Fidelidade e Carrinho -->
+        <div class="acoes-usuario">
+          <div class="box-pontos" id="box-fidelidade" title="Programa de Fidelidade Raízes">
+            <span>Pontos Fidelidade: <strong id="qtd-pontos">120</strong> pts</span>
+          </div>
+          <button id="btn-abrir-carrinho" class="btn-carrinho">
+            Sacola / Pedido (<span id="contagem-carrinho">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- Faixa de Promoções do Dia -->
+      <div class="faixa-promocao">
+        <div class="container">
+          <span><strong>Promoção do Dia:</strong> Cuscuz com carne de sol na manteiga de garrafa + Café coado com 15% de desconto.</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container principal">
+
+      <!-- Informações da Unidade e Filtro de Categorias -->
+      <section class="filtros-secao">
+        <div class="titulo-cardapio-linha">
+          <div>
+            <h2 id="titulo-unidade-atual">Cardápio Oficial — Unidade Recife (Boa Viagem)</h2>
+            <p class="subtitulo-unidade">Ingredientes regionais selecionados com preparo na hora.</p>
+          </div>
+          <div class="campo-busca">
+            <input type="text" id="campo-busca-prato" placeholder="Buscar no cardápio...">
+          </div>
+        </div>
+
+        <div class="botoes-categoria">
+          <button type="button" class="btn-filtro ativo" data-categoria="todos">Todos os Pratos</button>
+          <button type="button" class="btn-filtro" data-categoria="cuscuz">Cuscuz e Tapiocas</button>
+          <button type="button" class="btn-filtro" data-categoria="pratos">Pratos do Sertão</button>
+          <button type="button" class="btn-filtro" data-categoria="bebidas">Sucos Naturais</button>
+          <button type="button" class="btn-filtro" data-categoria="sobremesas">Sobremesas</button>
+        </div>
+      </section>
+
+      <!-- Grade de Pratos do Cardápio -->
+      <section id="lista-produtos" class="grid-produtos">
+        <!-- Itens inseridos dinamicamente pelo JavaScript -->
+      </section>
+
+      <!-- Painel de Acompanhamento do Status do Pedido -->
+      <section id="secao-rastreio" class="secao-rastreio" style="display: none;">
+        <div class="card-rastreio">
+          <div class="rastreio-topo">
+            <h3>Acompanhamento do Pedido em Tempo Real</h3>
+            <span class="badge-pedido" id="numero-pedido-rastreio">#RN-1024</span>
+          </div>
+          <p>Filial: <strong id="unidade-pedido-rastreio">RECIFE</strong> | Cliente: <strong id="cliente-pedido-rastreio">Luiz Gustavo</strong></p>
+
+          <div class="etapas-status">
+            <div class="etapa ativa" id="status-1">
+              <span class="icone-status">1</span>
+              <p>Recebido e Pago</p>
+              <small>Transação confirmada</small>
+            </div>
+            <div class="linha-status" id="linha-1"></div>
+            <div class="etapa" id="status-2">
+              <span class="icone-status">2</span>
+              <p>Em Preparo na Cozinha</p>
+              <small>Equipe preparando</small>
+            </div>
+            <div class="linha-status" id="linha-2"></div>
+            <div class="etapa" id="status-3">
+              <span class="icone-status">3</span>
+              <p>Pronto para Retirada</p>
+              <small>Retirar no balcão</small>
+            </div>
+          </div>
+
+          <div class="detalhes-rastreio">
+            <h4>Itens deste Pedido:</h4>
+            <ul id="lista-itens-rastreio" class="lista-itens-rastreio"></ul>
+          </div>
+
+          <div class="acoes-rastreio">
+            <button type="button" id="btn-avancar-status" class="btn-secundario">Simular Cozinha: Avançar Etapa</button>
+            <button type="button" id="btn-novo-pedido" class="btn-principal" style="max-width: 200px;">Fazer Novo Pedido</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- RODAPÉ COM LINKS INSTITUCIONAIS E LGPD -->
+    <footer class="rodape">
+      <div class="container rodape-grid">
+        <div class="col-rodape">
+          <h3>Rede Raízes do Nordeste S.A.</h3>
+          <p>Projeto Multidisciplinar — Trilha Front-End (UNINTER 2026).</p>
+          <p>Solução multicanal: Totem de Autoatendimento, Web e Aplicativo Mobile.</p>
+        </div>
+        <div class="col-rodape">
+          <h4>Privacidade e Termos (LGPD)</h4>
+          <ul>
+            <li><a href="#" id="link-rodape-politica">Política de Privacidade de Dados</a></li>
+            <li><a href="#" id="link-rodape-titular">Direitos do Titular (Art. 18 LGPD)</a></li>
+            <li>Encarregado de Dados (DPO): dpo@raizesdonordeste.com.br</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rodape-inferior">
+        <div class="container">
+          <p>Desenvolvido para fins acadêmicos e avaliativos. Aluno: Luiz Gustavo da Silva | RU: 4933749.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- /viewport-canal -->
+
+  <!-- MODAL: SACOLA E CHECKOUT DE PAGAMENTO -->
+  <div id="modal-carrinho" class="modal-fundo" role="dialog" aria-modal="true">
+    <div class="modal-conteudo">
+      <div class="modal-cabecalho">
+        <h3>Sacola de Pedidos</h3>
+        <button type="button" id="btn-fechar-carrinho" class="btn-fechar" aria-label="Fechar">&times;</button>
+      </div>
+
+      <div class="modal-corpo">
+        <div id="itens-carrinho" class="lista-carrinho">
+          <!-- Itens adicionados -->
+        </div>
+
+        <button type="button" id="btn-continuar-comprando" class="btn-secundario" style="width: 100%; margin: 8px 0 14px 0;">
+          Voltar ao Cardápio / Continuar Escolhendo
+        </button>
+
+        <!-- Seção do Programa de Fidelidade (Recompensas) -->
+        <div class="bloco-fidelidade">
+          <div class="fidelidade-header">
+            <strong>Programa de Fidelidade Raízes</strong>
+            <span>Saldo: <strong id="saldo-modal-pontos">120</strong> pontos</span>
+          </div>
+          <p>Resgate 100 pontos para receber <strong>R$ 10,00 de desconto</strong> neste pedido.</p>
+          <button type="button" id="btn-aplicar-desconto-pontos" class="btn-pontos">
+            Resgatar 100 pontos (-R$ 10,00)
+          </button>
+          <span id="aviso-desconto-aplicado" style="display: none; color: #15803d; font-weight: bold; margin-top: 6px;">
+            Desconto de R$ 10,00 aplicado com sucesso.
+          </span>
+        </div>
+
+        <div class="totais-carrinho">
+          <p>Subtotal: <span id="valor-subtotal">R$ 0,00</span></p>
+          <p id="linha-desconto" style="display: none; color: #15803d; font-weight: bold;">
+            Desconto Fidelidade: <span>- R$ 10,00</span>
+          </p>
+          <p class="total-destaque">Total a Pagar: <strong id="valor-total">R$ 0,00</strong></p>
+        </div>
+
+        <hr>
+
+        <!-- Formulário de Identificação do Cliente e Consentimento LGPD -->
+        <form id="form-checkout">
+          <h4>Identificação para Retirada</h4>
+          <p class="aviso-minimizacao">Seus dados são protegidos conforme a LGPD e usados apenas para identificação da comanda.</p>
+
+          <div class="campo-form">
+            <label for="nome-cliente">Nome Completo: *</label>
+            <input type="text" id="nome-cliente" required placeholder="Ex: Luiz Gustavo" value="Luiz Gustavo da Silva">
+          </div>
+
+          <div class="campo-form">
+            <label for="telefone-cliente">Telefone / WhatsApp: *</label>
+            <input type="tel" id="telefone-cliente" required placeholder="(81) 98888-7777" value="(81) 98888-7777">
+          </div>
+
+          <div class="campo-form">
+            <label for="cpf-cliente">CPF (Opcional - pontuação no Clube Raízes):</label>
+            <input type="text" id="cpf-cliente" placeholder="000.000.000-00">
+            <small style="color: #6b7280; font-size: 11px;">O CPF não é obrigatório para fechar o pedido (princípio de minimização de dados da LGPD).</small>
+          </div>
+
+          <!-- Checkbox de Consentimento LGPD explícito -->
+          <div class="campo-checkbox">
+            <input type="checkbox" id="check-lgpd" required checked>
+            <label for="check-lgpd">Concordo com o tratamento dos dados acima para emissão da comanda e acompanhamento do pedido, de acordo com a <a href="#" id="link-ler-lgpd-checkout">Política de Privacidade da LGPD</a>.</label>
+          </div>
+
+          <h4>Forma de Pagamento (Integração Externa)</h4>
+          <div class="opcoes-pagamento">
+            <label class="opcao-pay ativo">
+              <input type="radio" name="pagamento" value="pix" checked>
+              PIX (Aprovação imediata com QR Code)
+            </label>
+            <label class="opcao-pay">
+              <input type="radio" name="pagamento" value="cartao">
+              Cartão no Totem / Balcão
+            </label>
+          </div>
+
+          <!-- Bloco do PIX Simulado -->
+          <div id="bloco-pix" class="bloco-pix">
+            <p><strong>QR Code de Pagamento PIX (Simulado):</strong></p>
+            <div class="qrcode-simulado">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=pagamento-raizes-do-nordeste-pix" alt="QR Code PIX">
+            </div>
+            <p class="chave-pix">Código Copia e Cola: <code>00020126580014BR.GOV.BCB.PIX0136raizes-pagamento...</code></p>
+            <button type="button" id="btn-confirmar-pix" class="btn-principal" style="margin-top: 10px;">
+              Simular Confirmação do Pagamento pelo Banco
+            </button>
+          </div>
+
+          <div class="modal-botoes">
+            <button type="submit" id="btn-finalizar-pedido" class="btn-principal" style="display: none;">
+              Enviar para Gateway de Pagamento Externo
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: POLÍTICA DE PRIVACIDADE E DIREITOS DO TITULAR (LGPD COMPLETA) -->
+  <div id="modal-politica-lgpd" class="modal-fundo" role="dialog" aria-modal="true">
+    <div class="modal-conteudo">
+      <div class="modal-cabecalho">
+        <h3>Política de Privacidade e Proteção de Dados (LGPD)</h3>
+        <button type="button" id="btn-fechar-politica" class="btn-fechar" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="modal-corpo texto-politica">
+        <h4>1. Compromisso com a Privacidade</h4>
+        <p>A <strong>Rede de Lanchonetes Raízes do Nordeste</strong> adota o princípio de que conhecer o cliente é importante, mas respeitar sua privacidade é indispensável. Tratamos seus dados pessoais em estrita conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 - LGPD).</p>
+
+        <h4>2. Dados Coletados e Finalidade</h4>
+        <ul>
+          <li><strong>Nome e Telefone/WhatsApp:</strong> Coletados com base no Art. 7º, inciso V da LGPD (execução de contrato e procedimentos preliminares), para identificar o pedido, chamar no balcão da loja e avisar sobre o status do preparo;</li>
+          <li><strong>CPF:</strong> Campo estritamente <strong>opcional</strong>. Coletado apenas mediante consentimento do titular para identificação no programa de fidelidade e resgate de pontos;</li>
+          <li><strong>Cookies do Navegador:</strong> Utilizados exclusivamente para memorizar a unidade selecionada, itens na sacola e sua concordância com a privacidade.</li>
+        </ul>
+
+        <h4>3. Pagamentos e Segurança Financeira</h4>
+        <p>A Raízes do Nordeste <strong>não armazena números de cartões de crédito ou senhas</strong> em seus servidores locais. As transações financeiras são intermediadas por gateways e serviços externos especializados que cumprem normas de segurança bancária.</p>
+
+        <h4>4. Direitos do Titular (Artigo 18 da LGPD)</h4>
+        <p>Você pode a qualquer momento:</p>
+        <ul>
+          <li>Confirmar a existência de tratamento dos seus dados;</li>
+          <li>Acessar ou corrigir informações cadastrais;</li>
+          <li>Solicitar a eliminação dos seus dados e pontos do programa de fidelidade;</li>
+          <li>Revogar seu consentimento.</li>
+        </ul>
+        <p>Para exercer qualquer direito, entre em contato com nosso Encarregado de Proteção de Dados (DPO) através do e-mail: <strong>dpo@raizesdonordeste.com.br</strong>.</p>
+
+        <div style="margin-top: 20px;">
+          <button type="button" id="btn-entendido-politica" class="btn-principal">Entendido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
